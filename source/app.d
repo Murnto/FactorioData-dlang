@@ -11,8 +11,6 @@ import webpackdata;
 import factoratio;
 import fact_pack;
 
-extern(C) __gshared string[] rt_options = [ "gcopt=disable:1" ];
-
 private WebPackdata[string] packs;
 
 void index(HTTPServerRequest req, HTTPServerResponse res)
