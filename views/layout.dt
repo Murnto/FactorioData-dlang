@@ -2,6 +2,8 @@
 - import std.algorithm.iteration : map;
 - import std.array : join;
 
+- import layout_global;
+
 doctype html
 html(lang="en")><
     head><
@@ -43,12 +45,15 @@ html(lang="en")><
                                 | Config Pack: #{ pd.meta.title }
                             - else
                                 | Choose a configuration
-        //- | !{ analytics }
+        | !{ analytics }
         - if (pd)
             script.
                 var modpack = "#{ pd.meta.name }";
 
     block> content
 
-    //- footer
-    //-     p.text-center.text-muted WiP &ndash; #[a(href="https://github.com/Murnto/FactorioData") #{ git_short }]
+    footer
+        p.text-center.text-muted
+            a(href="/contact") Contact 
+            | &ndash;
+            a(href="https://github.com/Murnto/-") #{ commitShort }
