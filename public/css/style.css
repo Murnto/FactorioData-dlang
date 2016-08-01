@@ -1,0 +1,49 @@
+a {
+  color: #00b7ff;
+}
+table {
+  width: auto !important;
+}
+.item-count {
+  display: inline;
+  font-weight: bold;
+  width: 100%;
+}
+.item-count img {
+  display: inline;
+}
+.item-count div {
+  display: inline;
+  width: 100%;
+}
+.r-cat {
+  width: 50px;
+  float: right;
+}
+.ingredients div {
+  padding-top: 0.25em;
+  display: block;
+}
+.ingredients div img {
+  margin: auto;
+  background: #a9aaac;
+  padding: 0.2em;
+}
+.popover {
+  max-width: 300px;
+  width: 300px;
+}
+.tech-img {
+  width: 32px;
+}
+.tech-ingd {
+  display: inline-block;
+  padding: 0.25em;
+  background: #a9aaac;
+}
+.cat-resource-color {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: text-bottom;
+}
