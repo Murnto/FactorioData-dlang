@@ -7,11 +7,11 @@ block content
 				tr><
 					th>< Name
 					th>< Mods
-					th>< Info
+					th><
 			tbody><
-				- foreach(pack; packs)
+				- foreach(pack; sorted_packs)
 					tr><
-						td><
+						td(nowrap="nowrap")><
 							a(href="/pack/#{ pack.meta.name }/")><= pack.meta.title
 						td><= join(map!(a => a.title)(pack.meta.mods), ", ")
 						td><

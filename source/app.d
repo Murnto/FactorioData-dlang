@@ -5,6 +5,7 @@ import std.string;
 import std.regex;
 import std.file;
 import std.math;
+import std.algorithm : sort, map;
 
 import jsonizer.fromjson;
 import webpackdata;
@@ -12,6 +13,7 @@ import factoratio;
 import fact_pack;
 
 private WebPackdata[string] packs;
+private WebPackdata[] sorted_packs;
 
 void index(HTTPServerRequest req, HTTPServerResponse res)
 {
@@ -24,7 +26,7 @@ void packs_index(HTTPServerRequest req, HTTPServerResponse res)
 {
     WebPackdata pd = null;
     const string title = "Configurations";
-    res.render!("packs_index.dt", req, pd, title, packs);
+    res.render!("packs_index.dt", req, pd, title, sorted_packs);
 }
 
 void route_pack(WebPackdata pd, URLRouter router)
@@ -276,6 +278,8 @@ shared static this()
     router.get("/pack/", &packs_index);
 
     load_dynamic_packs(router, "pack");
+
+    sorted_packs = array(sort!"a.meta.title < b.meta.title"(packs.values));
 
     router.get("*", serveStaticFiles("public/"));
 
