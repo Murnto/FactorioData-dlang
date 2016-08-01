@@ -6,10 +6,12 @@ block content
 		table#table.table><
 			thead><
 				tr><
-					th>< Name
+					th>< Title
 					th>< Version
+					th>< Description
 			tbody><
 				- foreach(mod; pd.meta.mods)
 					tr><
-						td><= mod
-						td>< TODO
+						td><= mod.title
+						td><= mod.version_str
+						td><= mod.description
