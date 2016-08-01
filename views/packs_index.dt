@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	.container><
+		table#table.table><
+			thead><
+				tr><
+					th>< Name
+					th>< Mods
+					th>< Info
+			tbody><
+				- foreach(pack; packs)
+					tr><
+						td><
+							a(href="/pack/#{ pack.meta.name }/")><= pack.meta.title
+						td><= join(map!(a => a.title)(pack.meta.mods), ", ")
+						td><
+							a(href="/pack/#{ pack.meta.name }/info")>< Info

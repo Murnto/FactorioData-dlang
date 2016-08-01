@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    .container<>
+        h2<>= cft.title
+        h3<> Recipes
+        table#table.table<>
+            include partials/recipe_head
+            tbody<>
+                - foreach(idx, r; cft.recipes)
+                    include partials/recipe
+
+        - if (cft.uses.length)
+            h3<> Used in
+            table#table.table<>
+                include partials/recipe_head
+                tbody<>
+                    - foreach(r; cft.uses)
+                        include partials/recipe

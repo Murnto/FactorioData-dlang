@@ -1,0 +1,9 @@
+div<>
+    img.r-cat(src=pd.resolve_subgroup_image(chosen_recipe && chosen_recipe.subgroup ? chosen_recipe.subgroup : cft.subgroup))
+    - if (chosen_recipe)
+        div<> Time: #{ chosen_recipe.energy_required }
+        .ingredients<>
+            -foreach (ingd; chosen_recipe.ingredients)
+                div<>
+                    img(src=pd.resolve_img_url(ingd))
+                    span.ingd-descr<> #{" "}#{ ingd.amount }x #{ pd.resolve_locale_name(ingd) }

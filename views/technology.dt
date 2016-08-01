@@ -1,0 +1,42 @@
+extends layout
+
+block content
+    .container><
+        h1><
+            | !{ pd.embed_image(tech, "tech-img") } #{ title }
+        .tech-units><
+            .tech-ingd><
+                - foreach (ingd; tech.unit.ingredients)
+                    | #{ ingd.amount }x !{ pd.embed_item_popover(ingd) } #{ " " }
+            |  x #{ tech.unit.count }
+        - if (tech.requires_tech && tech.requires_tech.length)
+            h3>< Requires
+            - foreach (prereq; tech.requires_tech)
+                div><
+                    a(href="./#{ prereq.name }")><
+                        | !{ pd.embed_image(prereq, "tech-img") }&nbsp;&nbsp;#{ prereq.title }
+        br><
+        - if (tech.allows_tech && tech.allows_tech.length)
+            h3>< Allows
+            - foreach (allow; tech.allows_tech)
+                div><
+                    a(href="./#{ allow.name }")><
+                        | !{ pd.embed_image(allow, "tech-img") }&nbsp;&nbsp;#{ allow.title }
+        br><
+        - if (tech.unlocks_recipes && tech.unlocks_recipes.length)
+            h3>< Unlocks
+            - foreach (unlock; tech.unlocks_recipes)
+                - auto iamt = unlock.results[0];
+                - auto cft = pd.resolve_craftable(iamt.info_type, iamt.name);
+                div><
+                    | !{ pd.popover_anchor_start(iamt.info_type, iamt.name, cft.title) }
+                    - if (unlock.icon)
+                        | !{ pd.embed_image(unlock) }
+                    - else
+                        | !{ pd.embed_image( iamt) }
+                    
+                    - if (unlock.name != unlock.title)
+                        | &nbsp;&nbsp;#{ unlock.title }
+                    - else
+                        | &nbsp;&nbsp;#{ cft.title }
+                    | </a>

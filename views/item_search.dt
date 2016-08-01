@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    .container><
+        input#search.form-control(type="text", value="iron")><
+        table#table.sortable-theme-bootstrap(data-sortable="")><
+            thead><
+                tr><
+                    th>< Icon
+                    th>< Type
+                    th>< Name
+            tbody><
+                tr><
+    script(src="/js/table.js")><

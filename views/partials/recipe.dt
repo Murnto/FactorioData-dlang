@@ -1,0 +1,35 @@
+- import std.math : round;
+tr><
+    td><
+        - if (r.icon != null)
+            != pd.embed_image(r)
+        - else
+            != pd.embed_image(r.results[0])
+    td
+    //-     if r.assemblerMap
+    //-         a(href=recipeCategoryUrl(r.category))
+    //-             != embedImg('item', r.assemblerMap[0].name)
+    //-     else
+    //-         = r.category
+    td><= r.title ? r.title : r.name
+    td><
+        - foreach(ingd; r.ingredients)
+            | #{ ingd.amount }x !{ pd.embed_item_popover(ingd) }
+    td><
+        - foreach(i, bst; r.results)
+            - if (bst.probability != -1)
+                | #{ round(bst.probability * 100) }%
+
+            - if (bst.amount_min != -1)
+                | #{ bst.amount_min }-#{ bst.amount_max }x
+            - else
+                | #{ bst.amount }x
+
+            | !{ pd.embed_item_popover(bst) }
+            - if (i != r.results.length - 1)
+                br
+    td><= r.energy_required
+    td><
+        - foreach (unlock; r.unlocked_by)
+            a(href="/pack/#{ pd.meta.name }/tech/#{ unlock.name }")
+                | !{ pd.embed_image(unlock, "tech-img") } #{ unlock.title }

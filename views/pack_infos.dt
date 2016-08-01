@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	.container><
+		h3>< Mods
+		table#table.table><
+			thead><
+				tr><
+					th>< Name
+					th>< Version
+			tbody><
+				- foreach(mod; pd.meta.mods)
+					tr><
+						td><= mod
+						td>< TODO

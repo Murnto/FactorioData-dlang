@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    .container<>
+        h3<> All Recipes
+        table#table.table<>
+            include partials/recipe_head
+            tbody<>
+                - foreach(idx, r; cftecipes)
+                    include partials/recipe

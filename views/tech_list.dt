@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    .container><
+        h2>< Technology
+        table#table.table><
+            thead><
+                tr><
+                    //- th Icon
+                    th>< Name
+                    th>< Cost
+            tbody><
+                - foreach (name; pd.sorted_tech)
+                    - auto tech = name in pd.technology;
+                    tr><
+                        //- td!= embedImg('technology', tech.name, 'tech-img')
+                        td><
+                            a(href="/pack/#{ pd.meta.name }/tech/#{ tech.name }")><= tech.title
+                        td><
+                            .tech-units><
+                                .tech-ingd><
+                                    - foreach (ingd; tech.unit.ingredients)
+                                        | #{ ingd.amount }x !{ pd.embed_item_popover(ingd) } #{ " " }
+                                |  x #{ tech.unit.count }

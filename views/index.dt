@@ -1,0 +1,5 @@
+extends layout
+
+block content
+	h1 Example page - Home
+	p Hello, World!

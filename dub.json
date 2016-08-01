@@ -1,0 +1,19 @@
+{
+	"authors": [
+		"David"
+	],
+	"name": "fd-vibed",
+	"license": "proprietary",
+	"copyright": "Copyright © 2016, dave",
+	"description": "A simple vibe.d server application.",
+	"dependencies": {
+		"vibe-d": "~>0.7.30-alpha.3",
+		"diet-ng": "~>1.0.0-alpha.2",
+		"jsonizer": "~>0.6.0",
+		"fact_pack": {"path": "./fact_pack"}
+	},
+	"versions": [
+		"VibeDefaultMain",
+		"DietUseCache"
+	]
+}

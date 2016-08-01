@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    .container<>
+        h3<> All Popups
+
+        div
+            - foreach(idx, cft; craftables)
+                div
+                    a(href="/pack/#{ pd.meta.name }/api/popup/#{ cft.type }/#{ cft.name }")= cft.name

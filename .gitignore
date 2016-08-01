@@ -1,0 +1,12 @@
+.dub
+docs.json
+__dummy.html
+*.o
+*.obj
+/factoratio
+/fact_pack
+/.dub
+/pack
+profilegc.log
+dub.selections.json
+/fd-vibed

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    .container<>
+        h3<> Debug
+        
+        div
+            a(href="/pack/#{ pd.meta.name }/debug/all_recipes")>< All recipes
+        div
+            a(href="/pack/#{ pd.meta.name }/debug/all_popups")>< All popups

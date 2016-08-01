@@ -1,0 +1,9 @@
+thead<>
+    tr<>
+        th<> Icon
+        th<> Category
+        th<> Name
+        th<> Ingredients
+        th<> Result
+        th<> Time (s)
+        th<> Unlocked By
