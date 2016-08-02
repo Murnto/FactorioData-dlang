@@ -2,7 +2,6 @@ import std.file;
 import std.path;
 import std.string;
 
-
 import std.stdio;
 
 string commitShort;
@@ -14,8 +13,8 @@ private string getCommitLong()
 
     if (isFile(headPath))
     {
-        const string refHead = ".git/"~chomp(readText(headPath)).split(" ")[1];
-        
+        const string refHead = ".git/" ~ chomp(readText(headPath)).split(" ")[1];
+
         if (isFile(refHead))
         {
             return chomp(readText(refHead));
@@ -26,9 +25,10 @@ private string getCommitLong()
 
 private string getCommitShort()
 {
-    return getCommitLong()[0..7];
+    return getCommitLong()[0 .. 7];
 }
 
-static this() {
+static this()
+{
     commitShort = getCommitShort();
 }

@@ -57,7 +57,8 @@ void route_pack(WebPackdata pd, URLRouter router)
         const string imgPath = absolutePath(buildPath(pd.path, "icon", type, name));
 
         if (indexOf(name, ".png") + 4 != name.length || matchFirst(name,
-                r"[$%?/&]|\.\.") || matchFirst(type, r"[$%?\./&]") || indexOf(imgPath, absPath) != 0)
+                r"[$%?/&]|\.\.") || matchFirst(type, r"[$%?\./&]") || indexOf(imgPath,
+                absPath) != 0)
         {
             const string title = "Error";
             return res.render!("error.dt", req, pd, title);
@@ -122,8 +123,8 @@ void route_pack(WebPackdata pd, URLRouter router)
 
         foreach (cft; results)
         {
-            json_results ~= Json(["name" : Json(cft.name), "type"
-                    : Json(cft.type), "title" : Json(cft.title)]);
+            json_results ~= Json(["name" : Json(cft.name),
+                "type" : Json(cft.type), "title" : Json(cft.title)]);
         }
 
         res.writeJsonBody(json_results);
@@ -214,7 +215,8 @@ void dump_all_routes(URLRouter router)
 void load_static_packs(URLRouter router)
 {
     auto pack_directories = [
-        "/home/dave/dev/factorio/pack/base-f12/", "/home/dave/dev/factorio/pack/base-f13/", // "/home/dave/dev/factorio/pack/dytech-f12/",
+        "/home/dave/dev/factorio/pack/base-f12/",
+        "/home/dave/dev/factorio/pack/base-f13/", // "/home/dave/dev/factorio/pack/dytech-f12/",
         "/home/dave/dev/factorio/pack/5dim-f12/",
         "/home/dave/dev/factorio/pack/bobmods-f12/",
         "/home/dave/dev/factorio/pack/mopack-f12/",
@@ -235,7 +237,7 @@ auto create_redirect(const string from, const string to)
     void pack_link_redir(scope HTTPServerRequest req, scope HTTPServerResponse res)
     {
         const string dest = replaceFirst(req.path,
-                regex("/pack/" ~ from ~ "(/|$)"), "/pack/" ~ to ~ "/");
+            regex("/pack/" ~ from ~ "(/|$)"), "/pack/" ~ to ~ "/");
         return res.redirect(dest);
     }
 

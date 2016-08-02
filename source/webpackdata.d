@@ -25,16 +25,17 @@ class WebPackdata : Packdata
 
     string embed_image(T)(const T iamt, const string class_name = null)
     {
-        return "<img " ~ (class_name ? "class=\"" ~ class_name ~ "\" "
-                : "") ~ "src=\"" ~this.resolve_img_url(iamt) ~ "\" />";
+        return "<img " ~ (class_name ? "class=\"" ~ class_name ~ "\" " : "") ~ "src=\"" ~this.resolve_img_url(
+            iamt) ~ "\" />";
     }
 
     string popover_anchor_start(const ref string type, const ref string name,
-            string title = null, bool no_popover = false)
+        string title = null, bool no_popover = false)
     {
-        return "<a href=\"/pack/" ~this.meta.name ~ "/i/" ~ type ~ "/" ~ name ~ "\" title=\"" ~ title ~ (no_popover ? ""
-                : "\" data-trigger=\"hover\" data-item-type=\"" ~ type
-                ~ "\" data-item-name=\"" ~ name) ~ "\">";
+        return "<a href=\"/pack/" ~this.meta.name ~ "/i/" ~ type ~ "/" ~ name
+            ~ "\" title=\"" ~ title ~ (
+            no_popover ? "" : "\" data-trigger=\"hover\" data-item-type=\""
+            ~ type ~ "\" data-item-name=\"" ~ name) ~ "\">";
     }
 
     string embed_item_popover(const ItemAmount* iamt)
@@ -42,6 +43,6 @@ class WebPackdata : Packdata
         Craftable* cft = resolve_craftable(iamt.info_type, iamt.name);
         const bool no_popover = cft is null || get_first_recipe_with_ingredients(cft) is null;
         return this.popover_anchor_start(iamt.info_type, iamt.name, cft.title,
-                no_popover) ~this.embed_image(iamt) ~ "</a>";
+            no_popover) ~this.embed_image(iamt) ~ "</a>";
     }
 }
