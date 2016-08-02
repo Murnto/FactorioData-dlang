@@ -54,6 +54,6 @@ html(lang="en")><
 
     footer
         p.text-center.text-muted
-            a(href="/contact") Contact 
+            a(href="/contact") contact 
             | &ndash;
             a(href="https://github.com/Murnto/-") #{ commitShort }
