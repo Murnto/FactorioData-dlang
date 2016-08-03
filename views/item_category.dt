@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	.container><
+		table#table.table><
+			thead><
+				tr><
+					- foreach(ref head; itemcat.headers)
+						th><= head.name
+			tbody><
+				- foreach(ref ent; itemcat.ents)
+					tr><
+						- foreach(idx, dataitem; ent.parse(pd))
+							- if (itemcat.headers[idx].raw)
+								td><!= dataitem
+							- else
+								td><= dataitem

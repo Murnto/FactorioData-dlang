@@ -143,6 +143,28 @@ void route_pack(WebPackdata pd, URLRouter router)
         return res.render!("debug/tmp_all_recipes.dt", req, pd, title, cftecipes);
     }
 
+    void item_cats_list(scope HTTPServerRequest req, scope HTTPServerResponse res)
+    {
+        const string title = "Item Categories";
+        const CDContainer[] itemcats = pd.enumerateCategoryData().values();
+        return res.render!("item_cats_list.dt", req, pd, title, itemcats);
+    }
+
+    void item_category(scope HTTPServerRequest req, scope HTTPServerResponse res)
+    {
+        string name = req.params["name"];
+        CDContainer* itemcat = name in pd.enumerateCategoryData();
+       
+       if (itemcat)
+       {
+            const string title = itemcat.title;
+            return res.render!("item_category.dt", req, pd, title, itemcat);
+       }
+
+        const string title = "Error";
+        return res.render!("error.dt", req, pd, title);
+    }
+
     void all_popups(scope HTTPServerRequest req, scope HTTPServerResponse res)
     {
         const string title = "Popups";
@@ -184,6 +206,8 @@ void route_pack(WebPackdata pd, URLRouter router)
     packroute.get("/tech/:name", &technology);
     packroute.get("/api/popup/:type/:name", &api_popup);
     packroute.get("/api/find/:name", &api_item_search);
+    packroute.get("/itemcats", &item_cats_list);
+    packroute.get("/itemcats/:name", &item_category);
     packroute.get("/debug", &debug_index);
     packroute.get("/debug/all_recipes", &recipe_list);
     packroute.get("/debug/all_popups", &all_popups);

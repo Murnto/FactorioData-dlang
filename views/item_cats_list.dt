@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	.container><
+		table#table.table><
+			thead><
+				tr><
+					td>< Icon
+					td>< Name
+			tbody><
+				tr><
+					- foreach(cat; itemcats)
+						th><
+						th><= cat.name
