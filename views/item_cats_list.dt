@@ -2,6 +2,7 @@ extends layout
 
 block content
 	.container><
+		h2>< Item Categories
 		table#table.table><
 			thead><
 				tr><
@@ -11,4 +12,5 @@ block content
 				tr><
 					- foreach(cat; itemcats)
 						th><
-						th><= cat.name
+						th><
+							a(href="/pack/#{ pd.meta.name }/itemcats/#{ cat.name }")><= cat.title
