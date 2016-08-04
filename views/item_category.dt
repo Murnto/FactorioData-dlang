@@ -2,6 +2,7 @@ extends layout
 
 block content
 	.container><
+		h2><= itemcat.title
 		table#table.table><
 			thead><
 				tr><
