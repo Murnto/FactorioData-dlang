@@ -26,7 +26,8 @@ void init_factoratio(WebPackdata pd, URLRouter router)
             obj["category"] = r.category;
             if (!r.minable.isNull)
             {
-                obj["miningTime"] = Json(round(fromJSON!real(r.minable["mining_time"]) * 1000) / 1000);
+                obj["miningTime"] = Json(
+                    round(fromJSON!real(r.minable["mining_time"]) * 1000) / 1000);
                 obj["hardness"] = Json(round(fromJSON!real(r.minable["hardness"]) * 1000) / 1000);
             }
 

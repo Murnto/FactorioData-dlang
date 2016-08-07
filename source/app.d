@@ -154,12 +154,12 @@ void route_pack(WebPackdata pd, URLRouter router)
     {
         string name = req.params["name"];
         CDContainer* itemcat = name in pd.enumerateCategoryData();
-       
-       if (itemcat)
-       {
+
+        if (itemcat)
+        {
             const string title = itemcat.title;
             return res.render!("item_category.dt", req, pd, title, itemcat);
-       }
+        }
 
         const string title = "Error";
         return res.render!("error.dt", req, pd, title);
