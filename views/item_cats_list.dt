@@ -9,8 +9,8 @@ block content
 					td>< Icon
 					td>< Name
 			tbody><
-				tr><
-					- foreach(cat; itemcats)
-						th><
-						th><
+				- foreach(cat; itemcats)
+					tr><
+						td><
+						td><
 							a(href="/pack/#{ pd.meta.name }/itemcats/#{ cat.name }")><= cat.title
