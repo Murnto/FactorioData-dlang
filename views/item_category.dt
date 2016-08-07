@@ -3,7 +3,7 @@ extends layout
 block content
 	.container><
 		h2><= itemcat.title
-		table#table.table><
+		table#table.sortable-theme-bootstrap(data-sortable="")><
 			thead><
 				tr><
 					- foreach(ref head; itemcat.headers)
