@@ -12,5 +12,7 @@ block content
 				- foreach(cat; itemcats)
 					tr><
 						td><
+							- if (cat.ents.length)
+								!= pd.embed_image(cat.ents[0])
 						td><
 							a(href="/pack/#{ pd.meta.name }/itemcats/#{ cat.name }")><= cat.title
