@@ -210,9 +210,12 @@ void route_pack(WebPackdata pd, URLRouter router)
     packroute.get("/itemcats/:name", &item_category);
     packroute.get("/recipecat", &recipe_cat_list);
     packroute.get("/recipecat/:name", &recipe_category);
-    packroute.get("/debug", &debug_index);
-    packroute.get("/debug/all_recipes", &recipe_list);
-    packroute.get("/debug/all_popups", &all_popups);
+    debug
+    {
+        packroute.get("/debug", &debug_index);
+        packroute.get("/debug/all_recipes", &recipe_list);
+        packroute.get("/debug/all_popups", &all_popups);
+    }
 
     init_factoratio(pd, packroute);
 }

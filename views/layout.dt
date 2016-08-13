@@ -33,13 +33,14 @@ html(lang="en")><
                         li><
                             a(href="/pack/#{ pd.meta.name }/tech")>< Technology
                         li><
-                            a(href="/pack/#{ pd.meta.name }/debug")>< Debug
-                        li><
                             a(href="/pack/#{ pd.meta.name }/itemcats")>< Item Categories
                         li><
                             a(href="/pack/#{ pd.meta.name }/recipecat")>< Recipe Categories
                         li><
                             a(href="/pack/#{ pd.meta.name }/factoratio/")>< Factoratio
+                        - debug
+                            li><
+                                a(href="/pack/#{ pd.meta.name }/debug")>< Debug
                 ul.nav.navbar-nav.navbar-right><
                     li><
                         a(href="/pack/")><
