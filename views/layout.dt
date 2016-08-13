@@ -58,4 +58,4 @@ html(lang="en")><
         p.text-center.text-muted
             a(href="/contact") contact 
             | &ndash;
-            a(href="https://github.com/Murnto/-") #{ commitShort }
+            a(href="https://github.com/Murnto/FactorioData-dlang") #{ commitShort }
