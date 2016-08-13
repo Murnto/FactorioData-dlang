@@ -45,4 +45,13 @@ class WebPackdata : Packdata
         return this.popover_anchor_start(iamt.info_type, iamt.name, cft.title,
             no_popover) ~this.embed_image(iamt) ~ "</a>";
     }
+
+    string embed_item_popover(const BasicEnt* bent)
+    {
+        Craftable* cft = resolve_craftable(bent.type, bent.name);
+        const bool no_popover = cft is null || get_first_recipe_with_ingredients(cft) is null;
+        return this.popover_anchor_start(bent.type, bent.name, cft.title,
+            no_popover) ~this.embed_image(bent) ~ "</a>";
+    }
+
 }

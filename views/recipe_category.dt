@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	.container><
+		h2><= title
+		table#table.sortable-theme-bootstrap(data-sortable="")><
+			thead><
+				tr><
+					th>< Icon
+					th>< Name
+			tbody><
+				- foreach(ref assem; *machines)
+					tr><
+						td><!= pd.embed_item_popover(&assem)
+						td><
+							| !{ pd.popover_anchor_start(assem.type, assem.name, assem.title) }
+							= assem.title
+							| </a>

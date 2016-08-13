@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	.container><
+		h2>< Recipe Categories
+		table#table.table><
+			thead><
+				tr><
+					td>< Icon
+					td>< Name
+			tbody><
+				- foreach(rcat, machines; catMap)
+					tr><
+						td><
+							!= pd.embed_image(machines[0])
+						td><
+							a(href="/pack/#{ pd.meta.name }/recipecat/#{ rcat }")><= rcat

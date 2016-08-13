@@ -6,11 +6,11 @@ tr><
         - else
             != pd.embed_image(r.results[0])
     td
-    //-     if r.assemblerMap
-    //-         a(href=recipeCategoryUrl(r.category))
-    //-             != embedImg('item', r.assemblerMap[0].name)
-    //-     else
-    //-         = r.category
+        - if (r.category in pd.craftCategoryMap)
+            a(href="/pack/#{ pd.meta.name }/recipecat/#{ r.category }")
+                != pd.embed_image(pd.craftCategoryMap[r.category][0])
+        - else
+            = r.category
     td><= r.title ? r.title : r.name
     td><
         - foreach(ingd; r.ingredients)

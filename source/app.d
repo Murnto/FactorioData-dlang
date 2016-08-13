@@ -165,6 +165,28 @@ void route_pack(WebPackdata pd, URLRouter router)
         return res.render!("error.dt", req, pd, title);
     }
 
+    void recipe_cat_list(scope HTTPServerRequest req, scope HTTPServerResponse res)
+    {
+        const string title = "Recipe Categories";
+        const auto catMap = pd.craftCategoryMap;
+        return res.render!("recipe_cat_list.dt", req, pd, title, catMap);
+    }
+
+    void recipe_category(scope HTTPServerRequest req, scope HTTPServerResponse res)
+    {
+        string name = req.params["name"];
+        AssemblingMachine[]* machines = name in pd.craftCategoryMap;
+
+        if (machines && machines.length)
+        {
+            const string title = name;
+            return res.render!("recipe_category.dt", req, pd, title, machines);
+        }
+
+        const string title = "Error";
+        return res.render!("error.dt", req, pd, title);
+    }
+
     void all_popups(scope HTTPServerRequest req, scope HTTPServerResponse res)
     {
         const string title = "Popups";
@@ -208,6 +230,8 @@ void route_pack(WebPackdata pd, URLRouter router)
     packroute.get("/api/find/:name", &api_item_search);
     packroute.get("/itemcats", &item_cats_list);
     packroute.get("/itemcats/:name", &item_category);
+    packroute.get("/recipecat", &recipe_cat_list);
+    packroute.get("/recipecat/:name", &recipe_category);
     packroute.get("/debug", &debug_index);
     packroute.get("/debug/all_recipes", &recipe_list);
     packroute.get("/debug/all_popups", &all_popups);

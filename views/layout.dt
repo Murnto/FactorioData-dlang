@@ -37,6 +37,8 @@ html(lang="en")><
                         li><
                             a(href="/pack/#{ pd.meta.name }/itemcats")>< Item Categories
                         li><
+                            a(href="/pack/#{ pd.meta.name }/recipecat")>< Recipe Categories
+                        li><
                             a(href="/pack/#{ pd.meta.name }/factoratio/")>< Factoratio
                 ul.nav.navbar-nav.navbar-right><
                     li><
