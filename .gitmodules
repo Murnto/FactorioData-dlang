@@ -1,3 +1,6 @@
 [submodule "factoratio"]
 	path = factoratio
 	url = https://github.com/Murnto/factoratio
+[submodule "fact_pack"]
+	path = fact_pack
+	url = https://github.com/Murnto/fact_pack
