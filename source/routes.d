@@ -153,7 +153,7 @@ void route_pack(WebPackdata pd, URLRouter router)
     void recipe_category(scope HTTPServerRequest req, scope HTTPServerResponse res)
     {
         string name = req.params["name"];
-        AssemblingMachine[]* machines = name in pd.craftCategoryMap;
+        AssemblingMachine*[]* machines = name in pd.craftCategoryMap;
 
         if (machines && machines.length)
         {

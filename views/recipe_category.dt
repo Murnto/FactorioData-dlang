@@ -11,7 +11,7 @@ block content
 			tbody><
 				- foreach(ref assem; *machines)
 					tr><
-						td><!= pd.embed_item_popover(&assem)
+						td><!= pd.embed_item_popover(assem)
 						td><
 							| !{ pd.popover_anchor_start(assem.type, assem.name, assem.title) }
 							= assem.title
