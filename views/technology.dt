@@ -29,7 +29,7 @@ block content
                 - auto iamt = unlock.results[0];
                 - auto cft = pd.resolve_craftable(iamt.info_type, iamt.name);
                 div><
-                    | !{ pd.popover_anchor_start(iamt.info_type, iamt.name, cft.title) }
+                    | !{ pd.popover_anchor_start(iamt.info_type, iamt.name, cft is null ? null : cft.title, cft is null) }
                     - if (unlock.icon)
                         | !{ pd.embed_image(unlock) }
                     - else
