@@ -105,7 +105,7 @@ void load_dynamic_packs(URLRouter router, const string pack_dir)
 shared static this()
 {
     auto router = new URLRouter;
-    router.get("/", &index);
+    router.get("/", &packs_index);
     router.get("/pack", &packs_index);
     router.get("/pack/", &packs_index);
 
