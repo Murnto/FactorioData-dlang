@@ -9,6 +9,12 @@ block content
                 - foreach (ingd; tech.unit.ingredients)
                     | #{ ingd.amount }x !{ pd.embed_item_popover(ingd) } #{ " " }
             |  x #{ tech.unit.count }
+
+        - if (tech.description != null)
+            br
+            div
+                = tech.description
+
         - if (tech.requires_tech && tech.requires_tech.length)
             h3>< Requires
             - foreach (prereq; tech.requires_tech)

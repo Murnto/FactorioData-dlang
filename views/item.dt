@@ -3,6 +3,12 @@ extends layout
 block content
     .container<>
         h2<>= cft.title
+
+        - if (cft.description != null)
+            br
+            div
+                = cft.description
+
         h3<> Recipes
         table#table.table<>
             include partials/recipe_head
