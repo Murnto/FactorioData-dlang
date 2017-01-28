@@ -24,7 +24,7 @@ void init_factoratio(WebPackdata pd, URLRouter router)
             obj["id"] = ratio_id;
             obj["name"] = r.title;
             obj["category"] = r.category;
-            if (!r.minable)
+            if (r.minable)
             {
                 obj["miningTime"] = Json(round(r.mining_time * 1000) / 1000);
                 obj["hardness"] = Json(round(r.hardness * 1000) / 1000);
