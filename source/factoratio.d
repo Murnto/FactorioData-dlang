@@ -87,6 +87,41 @@ void init_factoratio(WebPackdata pd, URLRouter router)
         res.writeBody("recipes = " ~ serializeToJsonString(resp_json) ~ ";");
     }
 
+    void modules_js(scope HTTPServerRequest req, scope HTTPServerResponse res)
+    {
+        Json resp_json = Json.emptyObject;
+
+        foreach (const ref Module r; pd.modules)
+        {
+            Json obj = Json.emptyObject;
+            const string ratio_id = translate(r.name, ['-' : '_']);
+
+            obj["id"] = ratio_id;
+            obj["name"] = r.title;
+
+            obj["tier"] = r.tier;
+            // obj["limitation"] = r.limitation; // TODO
+            obj["effect"] = Json.emptyObject;
+
+            if (r.effect.consumption && r.effect.consumption.bonus != 1) {
+                obj["effect"]["consumption"] = r.effect.consumption.bonus;
+            }
+            if (r.effect.speed && r.effect.speed.bonus != 1) {
+                obj["effect"]["speed"] = r.effect.speed.bonus;
+            }
+            if (r.effect.productivity && r.effect.productivity.bonus != 1) {
+                obj["effect"]["productivity"] = r.effect.productivity.bonus;
+            }
+            if (r.effect.pollution && r.effect.pollution.bonus != 1) {
+                obj["effect"]["pollution"] = r.effect.pollution.bonus;
+            }
+
+            resp_json[ratio_id] = obj;
+        }
+
+        res.writeBody("modules = " ~ serializeToJsonString(resp_json) ~ ";");
+    }
+
     void factories_js(scope HTTPServerRequest req, scope HTTPServerResponse res)
     {
         Json resp_json = Json.emptyObject;
@@ -168,6 +203,7 @@ void init_factoratio(WebPackdata pd, URLRouter router)
     router.get("/factoratio/resources.js", &resources_js);
     router.get("/factoratio/recipes.js", &recipes_js);
     router.get("/factoratio/factories.js", &factories_js);
+    router.get("/factoratio/modules.js", &modules_js);
 
     auto fsettings = new HTTPFileServerSettings;
     fsettings.serverPathPrefix = router.prefix ~ "/factoratio";
