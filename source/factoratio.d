@@ -48,39 +48,75 @@ void init_factoratio(WebPackdata pd, URLRouter router)
         res.writeBody("resources = " ~ serializeToJsonString(resp_json) ~ ";");
     }
 
+    Json create_recipe_obj(const ref Recipe r, string obj_id)
+    {
+        Json obj = Json.emptyObject;
+
+        obj["id"] =  obj_id;
+        obj["name"] = r.title;
+        obj["category"] = r.category != null ? r.category : "crafting";
+        obj["speed"] = Json(1.0 / r.energy_required);
+        obj["resultCount"] = Json(null);
+        obj["ingredients"] = Json.emptyArray;
+
+        foreach (const ref ItemAmount* ingd; r.ingredients)
+        {
+            string ingd_name = translate(ingd.name, ['-' : '_']);
+            obj["ingredients"].appendArrayElement(Json([Json(ingd_name), Json(ingd.amount)]));
+        }
+
+        return obj;
+    }
+
     void recipes_js(scope HTTPServerRequest req, scope HTTPServerResponse res)
     {
         Json resp_json = Json.emptyObject;
 
         foreach (const ref Recipe r; pd.recipes)
         {
-            Json obj = Json.emptyObject;
-            const string ratio_id = translate(r.name, ['-' : '_']);
-
-            obj["id"] = ratio_id;
-            obj["name"] = r.title;
-            obj["category"] = r.category != null ? r.category : "crafting";
-            obj["speed"] = Json(1.0 / r.energy_required);
-            obj["resultCount"] = Json(null);
-            obj["ingredients"] = Json.emptyArray;
+            const string obj_id = translate(r.name, ['-' : '_']);
+            Json obj = create_recipe_obj(r, obj_id);
 
             foreach (const ref ItemAmount* rslt; r.results)
             {
                 if (rslt.name == r.name)
                 {
                     obj["resultCount"] = Json(rslt.amount != -1 ? rslt.amount : rslt.amount_min);
+                    resp_json[obj["id"].get!string] = obj;
                     break;
                 }
             }
-            foreach (const ref ItemAmount* ingd; r.ingredients)
-            {
-                string ingd_name = translate(ingd.name, ['-' : '_']);
-                obj["ingredients"].appendArrayElement(Json([Json(ingd_name), Json(ingd.amount)]));
-            }
+        }
 
-            if (obj["resultCount"].type != Json.Type.null_)
+        // add recipes for items where they are the sole result, may be poor choices :(
+        foreach (const ref Recipe r; pd.recipes)
+        {
+            const string obj_id = translate(r.name, ['-' : '_']);
+            Json obj = create_recipe_obj(r, obj_id);
+
+            if (r.results.length == 1 && resp_json[obj_id].type == Json.Type.undefined)
             {
-                resp_json[ratio_id] = obj;
+                auto rslt = r.results[0];
+                obj["title"] = pd.resolve_locale_name(rslt);
+                obj["resultCount"] = Json(rslt.amount != -1 ? rslt.amount : rslt.amount_min);
+                resp_json[obj["id"].get!string] = obj;
+            }
+        }
+
+        // add recipes for remaining items, though they may be poor choices :(
+        foreach (const ref Recipe r; pd.recipes)
+        {
+            foreach (const ref ItemAmount* rslt; r.results)
+            {
+                auto result_id = translate(rslt.name, ['-' : '_']);
+
+                if (resp_json[result_id].type == Json.Type.undefined)
+                {
+                    auto rslt_obj = create_recipe_obj(r, result_id);
+                    rslt_obj["resultCount"] = Json(rslt.amount != -1 ? rslt.amount : rslt.amount_min);
+                    rslt_obj["title"] = pd.resolve_locale_name(rslt);
+                    resp_json[result_id] = rslt_obj;
+                }
             }
         }
 
